@@ -27,6 +27,14 @@ private slots:
 
     void on_pushButton_loadImg_clicked();
 
+    void on_pushButton_LoadConfig_clicked();
+
+    void on_pushButton_loadxmlToGUI_clicked();
+
+    void on_pushButton_modifXML_clicked();
+
+    bool GetNodeValue(QDomNode& node, QString attributeName, QString& value);
+
 private:
     Ui::MainWindow *ui;
 
@@ -34,6 +42,8 @@ private:
 
     char m_chLogBuf[10240];
     void CustWriteFormatLog(const char* szfmt, ...);
+
+    QString m_strLoadedXML;
 };
 
 #endif // MAINWINDOW_H

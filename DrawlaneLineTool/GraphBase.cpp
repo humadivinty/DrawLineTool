@@ -28,8 +28,7 @@ bool online(LineSegment l, PointEx p)
 		   && (((p.x - l.startPoint.x)*(p.x - l.endPoint.x) <= 0) && ((p.y - l.startPoint.y)*(p.y - l.endPoint.y) <= 0)));
 }
 
-PointEx rotate(PointEx o, double d, PointEx p)
-{
+PointEx rotate(PointEx o, double d, PointEx p){
 	PointEx tp;
 	p.x -= o.x;
 	p.y -= o.y;

@@ -23,6 +23,7 @@ public:
     void paintEvent(QPaintEvent *event) override;
 
     std::vector<LineSegment> GetCurrentLines();
+    void SetCurrentLines(std::vector<LineSegment>& lines );
 
 private:
     void drawLineSeg(QPainter* p);

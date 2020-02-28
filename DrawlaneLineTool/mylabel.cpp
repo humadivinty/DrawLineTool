@@ -293,6 +293,35 @@ std::vector<LineSegment> MyLabel::GetCurrentLines()
     return lines;
 }
 
+void MyLabel::SetCurrentLines(std::vector<LineSegment> &lines)
+{
+    const int width = this->width();
+    const int height = this->height();
+    double x = 0.0;
+    double y = 0.0;
+
+    lineSegs.clear();
+
+    auto converToCoordinate = [](int percentage, int baseValue)
+    {
+        return percentage* baseValue;
+    };
+
+    for(auto it = lines.begin(); it!= lines.end; it++)
+    {
+        LineSegment lineInput = *it;
+        std::shared_ptr<LINESEG> pL = std::make_shared<LINESEG>();
+        pL->seg->startPoint.x = converToCoordinate(lineInput.startPoint.x, width);
+        pL->seg->startPoint.y = converToCoordinate(lineInput.startPoint.y, height);
+
+        pL->seg->endPoint.x = converToCoordinate(lineInput.endPoint.x, width);
+        pL->seg->endPoint.y = converToCoordinate(lineInput.endPoint.y, height);
+
+        lineSegs.push_back(PL);
+    }
+    update();
+}
+
 void MyLabel::drawLineSeg(QPainter *p)
 {
     QPen pen;
