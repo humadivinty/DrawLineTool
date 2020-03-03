@@ -7,6 +7,8 @@
 
 #define MAX_THREAD_COUNT 5
 
+typedef void(*JPEG_Arrive)(void* pUser, int Statuse);
+
 class Camera6467_plate :    public BaseCamera
 {
 public:
@@ -34,6 +36,9 @@ public:
 	void AnalysisAppendInfo(CameraResult* pResult);	
 
     bool SetJpegCallbackOnly();
+
+    void SetJpegReceiveMsgCallback(void* pFunc,void* pUser);
+    void SentJpegCallback(int iValue);
 private:
     int AnalysisVelchType(const char* vehType);
     void ReadConfig();
@@ -78,6 +83,9 @@ private:
     ThreadMutex m_csResult;
     CameraIMG m_Bin_IMG_Temp;
     CameraIMG m_Small_IMG_Temp;
+
+    void* m_pJpegCallbackFunc;
+    void* m_pUserData;
 
 private:
 

@@ -42,6 +42,8 @@ private:
     std::shared_ptr<LINESEG> selectLineSeg = nullptr;//选中的线段
 
     QPointF movePoint;
+
+    QLabel *m_CoordinateLable;
 };
 
 #endif // MYLABEL_H

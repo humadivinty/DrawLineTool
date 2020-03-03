@@ -100,7 +100,21 @@
            </size>
           </property>
           <property name="text">
-           <string>下载配置文件</string>
+           <string>下载xml配置文件</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_loadxmlToGUI">
+          <property name="text">
+           <string>加载xml配置文件</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_modifXML">
+          <property name="text">
+           <string>应用车道线修改到xml</string>
           </property>
          </widget>
         </item>
@@ -113,7 +127,7 @@
            </size>
           </property>
           <property name="text">
-           <string>上传配置文件</string>
+           <string>上传xml配置文件</string>
           </property>
          </widget>
         </item>
@@ -126,7 +140,14 @@
            </size>
           </property>
           <property name="text">
-           <string>加载图片</string>
+           <string>加载JPEG流图片</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_loadLocalImg">
+          <property name="text">
+           <string>加载本地图片</string>
           </property>
          </widget>
         </item>

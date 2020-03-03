@@ -30,6 +30,8 @@ m_pCaptureImg(NULL),
 m_pTempBig(NULL),
 m_CameraResult(NULL),
 m_BufferResult(NULL),
+m_pJpegCallbackFunc(NULL),
+m_pUserData(NULL),
 m_bResultComplete(false),
 m_bJpegComplete(false),
 m_bSaveToBuffer(false),
@@ -501,6 +503,8 @@ int Camera6467_plate::DeviceJPEGStream(PBYTE pbImageData,
     }
     m_csResult.unlock();
 
+    SentJpegCallback(iCout);
+
     return 0;
 }
 
@@ -881,4 +885,25 @@ bool Camera6467_plate::SetJpegCallbackOnly()
         WRITE_LOG(" Set JPEGCALLBACK success.");
         return true;
     }
+}
+
+void Camera6467_plate::SetJpegReceiveMsgCallback(void* pFunc,void* pUser)
+{
+    m_csResult.lock();
+
+    m_pJpegCallbackFunc = pFunc;
+    m_pUserData = pUser;
+
+    m_csResult.unlock();
+}
+
+void Camera6467_plate::SentJpegCallback(int iValue)
+{
+    m_csResult.lock();
+
+    if(m_pJpegCallbackFunc)
+    {
+        ((JPEG_Arrive)m_pJpegCallbackFunc)(m_pUserData, iValue);
+    }
+    m_csResult.unlock();
 }

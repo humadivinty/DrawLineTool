@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include"cameraModule/Camera6467_plate.h"
+#include<QDomNode>
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +36,8 @@ private slots:
 
     bool GetNodeValue(QDomNode& node, QString attributeName, QString& value);
 
+    void on_pushButton_loadLocalImg_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -44,6 +47,14 @@ private:
     void CustWriteFormatLog(const char* szfmt, ...);
 
     QString m_strLoadedXML;
+
+public:
+    static void JPEG_Arrive(void* pUser, int Statuse);
+
+signals:
+    void JpegArrive();
+public slots:
+    void GetJpegImg();
 };
 
 #endif // MAINWINDOW_H

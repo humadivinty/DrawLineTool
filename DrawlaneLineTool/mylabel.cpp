@@ -3,9 +3,14 @@
 #include<QDebug>
 #include <vector>
 
+
 MyLabel::MyLabel(QWidget *parent) : QLabel(parent)
 {
     setMouseTracking(true);
+    m_CoordinateLable = new QLabel(this);
+    //m_CoordinateLable->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    m_CoordinateLable->setScaledContents(true);
+    m_CoordinateLable->adjustSize();
 }
 
 void MyLabel::mousePressEvent(QMouseEvent *event)
@@ -184,6 +189,14 @@ void MyLabel::mouseMoveEvent(QMouseEvent *event)
         }
     }
     update();
+    m_CoordinateLable->move(10, this->height()-15);
+
+    QString pointString = QString("X:%1,Y:%2")
+            .arg(QString::number(movePt.x()/this->width(), 'f', 2))
+            .arg(QString::number(movePt.y()/this->height(), 'f', 2));
+    m_CoordinateLable->setText(pointString);
+    m_CoordinateLable->adjustSize();
+    //qDebug()<<pointString;
 }
 
 void MyLabel::mouseReleaseEvent(QMouseEvent *event)
@@ -304,10 +317,10 @@ void MyLabel::SetCurrentLines(std::vector<LineSegment> &lines)
 
     auto converToCoordinate = [](int percentage, int baseValue)
     {
-        return percentage* baseValue;
+        return (percentage* baseValue)/100;
     };
 
-    for(auto it = lines.begin(); it!= lines.end; it++)
+    for(auto it = lines.begin(); it!= lines.end(); it++)
     {
         LineSegment lineInput = *it;
         std::shared_ptr<LINESEG> pL = std::make_shared<LINESEG>();
@@ -316,8 +329,9 @@ void MyLabel::SetCurrentLines(std::vector<LineSegment> &lines)
 
         pL->seg->endPoint.x = converToCoordinate(lineInput.endPoint.x, width);
         pL->seg->endPoint.y = converToCoordinate(lineInput.endPoint.y, height);
+        pL->bDraw = true;
 
-        lineSegs.push_back(PL);
+        lineSegs.push_back(pL);
     }
     update();
 }
@@ -354,6 +368,9 @@ void MyLabel::drawLineSeg(QPainter *p)
                     pen.setWidth(2);
                     p->setPen(pen);
                     p->drawLine(pt1, pt2);
+                    p->drawText(QPoint(pt1.x()+10,pt1.y()),  QString("%1,%2")
+                                .arg(QString::number(pt1.x()/this->width(), 'f', 2))
+                                .arg(QString::number(pt1.y()/this->height(), 'f', 2)));
                 }
                 if(oneLine->bSelEndPt)
                 {
@@ -361,6 +378,9 @@ void MyLabel::drawLineSeg(QPainter *p)
                     pen.setWidth(2);
                     p->setPen(pen);
                     p->drawLine(pt1, pt2);
+                    p->drawText(QPoint(pt2.x()+10,pt2.y()),  QString("%1,%2")
+                                .arg(QString::number(pt2.x()/this->width(), 'f', 2))
+                                .arg(QString::number(pt2.y()/this->height(), 'f', 2)));
                 }
             }
             else if(oneLine->bSelLine == false
