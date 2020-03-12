@@ -582,7 +582,7 @@ CameraResult* Camera6467_plate::GetOneResult()
 
 bool Camera6467_plate::SaveCIMG(CameraIMG& imgStruct,
                                 struct tm& systime,
-                                DWORD tickCount,
+                                unsigned long tickCount,
                                 int iType,
                                 std::string& outputPath)
 {
@@ -600,7 +600,7 @@ bool Camera6467_plate::SaveCIMG(CameraIMG& imgStruct,
         //    systime.wMonth,
         //    systime.wDay,
         //    tickCount);
-		sprintf(szImgPath,  "%s\\%04d-%02d-%02d-%u_s",
+        sprintf(szImgPath,  "%s\\%04d-%02d-%02d-%lu_s",
 			m_chResultPath,
             systime.tm_year,
             systime.tm_mon,

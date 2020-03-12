@@ -107,11 +107,6 @@ void MyLabel::mousePressEvent(QMouseEvent *event)
             }
         }
         update();
-//        if(lineSegs.size() == 0)
-//        {
-//            startPoint= {0.0, 0.0};
-//            endPoint = {0.0, 0.0};
-//        }
 
         break;
     default:
@@ -121,35 +116,7 @@ void MyLabel::mousePressEvent(QMouseEvent *event)
 
 
 void MyLabel::mouseMoveEvent(QMouseEvent *event)
-{    
-//    qreal x = 0.0;
-//    qreal y = 0.0;
-//    if(event->pos().x() < 0)
-//    {
-//        x = 0.0;
-//    }
-//    else if(event->pos().x() > width())
-//    {
-//        x = width();
-//    }
-//    else
-//    {
-//        x = event->pos().x();
-//    }
-
-//    if(event->pos().y() < 0)
-//    {
-//        y = 0.0;
-//    }
-//    else if(event->pos().y() > height())
-//    {
-//        y = height();
-//    }
-//    else
-//    {
-//        y = event->pos().y();
-//    }
-//    QPointF movePt(x, y);
+{
     QPointF movePt = event->pos();
     //qDebug()<<"mouseMoveEvent "<<event->pos();
 
@@ -432,26 +399,6 @@ void MyLabel::selSeg(QPointF &pt)
                 oneLine->bSelLine = false;
                 oneLine->bSelEndPt = true;
             }
-
-
-//            if(abs(l)< EP)
-//            {//起点
-//                oneLine->bSelStartPt = true;
-//                oneLine->bSelLine = false;
-//                oneLine->bSelEndPt = false;
-//            }
-//            else if(abs(l - 1.0) < EP)
-//            {//终点
-//                oneLine->bSelStartPt = false;
-//                oneLine->bSelLine = false;
-//                oneLine->bSelEndPt = true;
-//            }
-//            else if(l < 1 && l > 0)
-//            {//整条线
-//                oneLine->bSelStartPt = false;
-//                oneLine->bSelLine = true;
-//                oneLine->bSelEndPt = false;
-//            }
         }
         else
         {
